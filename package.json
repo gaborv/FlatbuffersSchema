@@ -54,11 +54,5 @@
         "path": "./syntaxes/flatbuffers.json"
       }
     ]
-    // "snippets": [
-    //   {
-    //     "language": "elm",
-    //     "path": "./snippets/elm.json"
-    //   }
-    // ]
   }
 }
