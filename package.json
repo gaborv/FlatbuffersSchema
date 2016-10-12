@@ -1,0 +1,64 @@
+{
+  "name": "flatbuffers",
+  "description": "Flatbuffers Schema highlighter for Visual Studio Code",
+  "version": "0.1.0",
+  "publisher": "gaborv",
+  "author": {
+    "name": "Gabor Varga"
+  },
+  "icon": "images/fpl_logo_small.png",
+  "galleryBanner": {
+    "color": "#232323",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Languages"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaborv/FlatbuffersSchema"
+  },
+  "bugs": {
+    "url": "https://github.com/gaborv/FlatbuffersSchema/issues"
+  },
+  "contributes": {
+    "configuration": { },
+    "languages": [
+      {
+        "id": "flatbuffers",
+        "aliases": [
+          "Flatbuffers",
+          "flatbuffers",
+          "Flatbuffers Schema",
+          "fbs",
+          "idl"
+        ],
+        "extensions": [
+          ".fbs",
+          ".idl"
+        ],
+        "configuration": "./FlatbuffersSchema.configuration.json"
+      }
+    ],
+    "commands": [ ],
+    "outputChannels": [ ],
+    "keybindings": [ ],
+    "grammars": [
+      {
+        "language": "flatbuffers",
+        "scopeName": "source.flatbuffers",
+        "path": "./syntaxes/flatbuffers.json"
+      }
+    ]
+    // "snippets": [
+    //   {
+    //     "language": "elm",
+    //     "path": "./snippets/elm.json"
+    //   }
+    // ]
+  }
+}
