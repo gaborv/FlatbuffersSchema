@@ -1,7 +1,7 @@
 # Flatbuffers Schema colorizer for Visual Studio Code
 This simple language support module aim to provide syntax highlighting to Flatbuffers schema definition files.
 
-More about the Flatbuffers schema descriptions: https://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html
+More about the Flatbuffers schema: https://flatbuffers.dev/schema/
 
 
 ## Acknowledgements
