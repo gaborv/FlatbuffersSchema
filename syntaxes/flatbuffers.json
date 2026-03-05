@@ -255,7 +255,7 @@
           "include": "#comments"
         },
         {
-          "match": "\\b(id|deprecated|required|original_order|force_align|bit_flags|nested_flatbuffer|key)\\b",
+          "match": "\\b(id|deprecated|required|original_order|force_align|bit_flags|nested_flatbuffer|key|hash|native_inline|native_type|native_default|flexbuffer|streaming)\\b",
           "name": "keyword.control.flatbuffers"
         },
         {
