@@ -1,0 +1,6 @@
+.git/**
+.github/**
+.vscode/**
+.gitignore
+sample/**
+GRAMMAR_COVERAGE.md
