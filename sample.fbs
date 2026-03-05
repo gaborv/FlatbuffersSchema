@@ -1,0 +1,215 @@
+// Sample FlatBuffers Schema File
+// This file demonstrates all grammar features supported by this VS Code extension
+// Reference: https://flatbuffers.dev/grammar/
+
+// Include directive
+// include "other_schema.fbs";
+
+// Namespace declaration
+namespace MyGame.Sample;
+
+// File identifier (4 characters for binary verification)
+file_identifier "MYGA";
+
+// File extension for generated files
+file_extension "mgb";
+
+// Attribute declaration (custom attributes)
+attribute "priority";
+attribute "deprecated_since";
+
+// ========== Enums ==========
+
+// Enum with explicit type and values
+enum Color : byte {
+  Red = 0,
+  Green,
+  Blue = 2
+}
+
+// Enum with bit flags
+enum Equipment : byte (bit_flags) {
+  None = 0,
+  Weapon = 1,
+  Armor = 2,
+  Shield = 4,
+  Helmet = 8
+}
+
+// ========== Union ==========
+
+// Union type for polymorphic fields
+union WeaponType {
+  Sword,
+  Axe,
+  Bow
+}
+
+// ========== Struct ==========
+
+// Structs are fixed-size, no optional fields, always present
+struct Vec3 {
+  x: float32;
+  y: float32;
+  z: float32;
+}
+
+struct Quaternion {
+  x: float64;
+  y: float64;
+  z: float64;
+  w: float64;
+}
+
+// ========== Tables ==========
+
+// Tables with all supported data types
+table TypeShowcase {
+  // Basic integer types
+  bool_field: bool;
+  byte_field: byte;
+  ubyte_field: ubyte;
+  short_field: short;
+  ushort_field: ushort;
+  int_field: int;
+  uint_field: uint;
+  long_field: long;
+  ulong_field: ulong;
+
+  // Extended integer types (explicitly sized)
+  int8_field: int8;
+  uint8_field: uint8;
+  int16_field: int16;
+  uint16_field: uint16;
+  int32_field: int32;
+  uint32_field: uint32;
+  int64_field: int64;
+  uint64_field: uint64;
+
+  // Floating point types
+  float_field: float;
+  double_field: double;
+  float32_field: float32;
+  float64_field: float64;
+
+  // String type
+  string_field: string;
+}
+
+table Sword {
+  name: string;
+  damage: int32;
+  durability: uint16;
+}
+
+table Axe {
+  name: string;
+  damage: int32;
+  weight: float32;
+}
+
+table Bow {
+  name: string;
+  damage: int32;
+  range: uint32;
+}
+
+// Table with metadata attributes
+table Monster {
+  // Field with ID attribute (for schema evolution)
+  id: uint32 (id: 0);
+
+  // Struct field
+  pos: Vec3;
+  rotation: Quaternion;
+
+  // Required field
+  name: string (required);
+
+  // Fields with default values
+  mana: int16 = 150;
+  hp: int16 = 100;
+
+  // Deprecated field (kept for compatibility)
+  friendly: bool = false (deprecated);
+
+  // Vector of scalars
+  inventory: [ubyte];
+
+  // Enum field with default
+  color: Color = Blue;
+
+  // Vector of tables
+  weapons: [Sword];
+
+  // Union field
+  equipped_weapon: WeaponType;
+
+  // Vector of structs
+  path: [Vec3];
+
+  // Nested flatbuffer
+  nested_data: [ubyte] (nested_flatbuffer: "TypeShowcase");
+
+  // Field with force_align
+  aligned_value: double (force_align: 8);
+
+  // Field with key attribute (for sorted vectors)
+  unique_id: string (key);
+
+  // Field with original_order
+  legacy_field: int32 (original_order);
+
+  // Field with native attributes
+  native_field: int32 (native_inline);
+  custom_type: int64 (native_type: "CustomType");
+
+  // Field with hash attribute
+  hash_field: string (hash: "fnv1_64");
+}
+
+// Table for player
+table Player {
+  name: string (required, key);
+  level: uint16 = 1;
+  experience: uint64 = 0;
+  gold: uint32 = 0;
+  monsters: [Monster];
+}
+
+// Response table for RPC
+table GameResponse {
+  success: bool;
+  message: string;
+  error_code: int32;
+}
+
+// ========== RPC Services ==========
+
+// RPC service for game operations
+rpc_service GameService {
+  // Get player information
+  GetPlayer(Player):Player;
+
+  // Create a new player
+  CreatePlayer(Player):GameResponse;
+
+  // Update player information
+  UpdatePlayer(Player):GameResponse;
+
+  // Delete a player
+  DeletePlayer(Player):GameResponse (streaming: "server");
+}
+
+// RPC service for monster operations
+rpc_service MonsterService {
+  GetMonster(Monster):Monster;
+  CreateMonster(Monster):GameResponse;
+  UpdateMonster(Monster):GameResponse;
+  ListMonsters(GameResponse):Monster (streaming: "server");
+}
+
+// ========== Root Type ==========
+
+// Define the root type for serialization
+root_type Player;
