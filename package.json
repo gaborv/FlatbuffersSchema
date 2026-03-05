@@ -1,12 +1,12 @@
 {
   "name": "flatbuffers",
   "description": "Flatbuffers Schema highlighter for Visual Studio Code",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "gaborv",
   "author": {
     "name": "Gabor Varga"
   },
-  "icon": "images/fpl_logo_small.png",
+  "icon": "images/icon.png",
   "galleryBanner": {
     "color": "#232323",
     "theme": "dark"
