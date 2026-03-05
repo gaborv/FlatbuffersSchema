@@ -10,6 +10,10 @@ More about the Flatbuffers schema: https://flatbuffers.dev/schema/
 - ✅ **RPC Services** - Complete support for `rpc_service` declarations for gRPC integration
 - ✅ **Metadata Attributes** - All standard and custom metadata attributes
 
+## Screenshot
+
+![Syntax Highlighting Demo](images/demo.png)
+
 ## Sample File
 
 See [sample.fbs](./sample/sample.fbs) for a comprehensive example demonstrating all supported grammar features.
