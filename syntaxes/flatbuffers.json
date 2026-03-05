@@ -32,10 +32,13 @@
       "include": "#table-decl"
     },
     {
+      "include": "#rpc-service-decl"
+    },
+    {
       "include": "#root_type-decl"
     },
     {
-      "match": "\\b(attribute|include|file_identifier|file_extension)\\b",
+      "match": "\\b(attribute|include|file_identifier|file_extension|rpc_service)\\b",
       "name": "keyword.control.flatbuffers"
     }
   ],
@@ -132,7 +135,7 @@
     "typename": {
       "patterns": [
         {
-          "match": "(\\.)?\\s*\\b(bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string)\\b",
+          "match": "(\\.)?\\s*\\b(bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string|int8|uint8|int16|uint16|int32|uint32|int64|uint64|float32|float64)\\b",
           "captures": {
             "1": {
               "name": "invalid.illegal.flatbuffers"
@@ -143,7 +146,7 @@
           }
         },
         {
-          "match": "\\b(?!(enum|namespace|union|struct|table|include|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string)\\W)([_a-zA-Z]\\w*)\\s*(?=\\.)",
+          "match": "\\b(?!(enum|namespace|union|struct|table|include|rpc_service|root_type|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string|int8|uint8|int16|uint16|int32|uint32|int64|uint64|float32|float64)\\W)([_a-zA-Z]\\w*)\\s*(?=\\.)",
           "captures": {
             "2": {
               "name": "entity.name.section.flatbuffers"
@@ -151,17 +154,17 @@
           }
         },
         {
-          "match": "\\b(?!(enum|namespace|union|struct|table|include|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string)\\W)([_a-zA-Z]\\w*)",
+          "match": "\\b(?!(enum|namespace|union|struct|table|include|rpc_service|root_type|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string|int8|uint8|int16|uint16|int32|uint32|int64|uint64|float32|float64)\\W)([_a-zA-Z]\\w*)",
           "name": "entity.name.type.flatbuffers"
         }
       ]
     },
     "name": {
-      "match": "\\b(?!(enum|namespace|union|struct|table|include|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string)\\W)([_a-zA-Z]\\w*)\\b",
+      "match": "\\b(?!(enum|namespace|union|struct|table|include|rpc_service|root_type|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string|int8|uint8|int16|uint16|int32|uint32|int64|uint64|float32|float64)\\W)([_a-zA-Z]\\w*)\\b",
       "name": "entity.name.tag.flatbuffers"
     },
     "packname": {
-      "match": "\\b(?!(enum|namespace|union|struct|table|include|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string)\\W)([_a-zA-Z]\\w*)\\b",
+      "match": "\\b(?!(enum|namespace|union|struct|table|include|rpc_service|root_type|true|false|bool|byte|ubyte|short|ushort|int|uint|float|long|ulong|double|string|int8|uint8|int16|uint16|int32|uint32|int64|uint64|float32|float64)\\W)([_a-zA-Z]\\w*)\\b",
       "name": "entity.name.section.flatbuffers"
     },
     "numeric": {
@@ -431,6 +434,55 @@
         },
         {
           "include": "#typename"
+        }
+      ]
+    },
+    "rpc-service-decl": {
+      "begin": "\\b(rpc_service)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.flatbuffers"
+        }
+      },
+      "end": "(?<=})",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#typename"
+        },
+        {
+          "begin": "{",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#rpc-method"
+            }
+          ]
+        }
+      ]
+    },
+    "rpc-method": {
+      "begin": "([_a-zA-Z]\\w*)\\s*(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.flatbuffers"
+        }
+      },
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#typename"
+        },
+        {
+          "include": "#metadata"
         }
       ]
     }
