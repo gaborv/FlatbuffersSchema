@@ -5,19 +5,14 @@ More about the Flatbuffers schema: https://flatbuffers.dev/schema/
 
 ## Features
 
-- ✅ **Full Grammar Support** - 100% coverage of the official FlatBuffers grammar specification
+- ✅ **Full Grammar Support** - 100% coverage of the official FlatBuffers grammar specification (as of 03/05/2026)
 - ✅ **All Data Types** - Support for all basic and extended numeric types (int8, uint8, int16, uint16, int32, uint32, int64, uint64, float32, float64)
 - ✅ **RPC Services** - Complete support for `rpc_service` declarations for gRPC integration
 - ✅ **Metadata Attributes** - All standard and custom metadata attributes
-- ✅ **Modern Syntax** - Up-to-date with the latest FlatBuffers specification
 
 ## Sample File
 
-See [sample.fbs](./sample.fbs) for a comprehensive example demonstrating all supported grammar features.
-
-## Grammar Coverage
-
-For detailed information about grammar support, see [GRAMMAR_COVERAGE.md](./GRAMMAR_COVERAGE.md).
+See [sample.fbs](./sample/sample.fbs) for a comprehensive example demonstrating all supported grammar features.
 
 ## References
 
